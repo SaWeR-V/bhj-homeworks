@@ -8,6 +8,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  position: relative;
 }
 
 .status {
@@ -22,9 +23,30 @@
 }
 
 .hole_has-mole {
-  background-image: url(https://i.postimg.cc/rmtGV8h9/mole.png);
-  background-position: center center;
+  background-image: url(https://e7.pngegg.com/pngimages/377/612/png-clipart-zombie-illustration-lifesize-zombie-holidays-halloween.png);
+  background-position: -390px 0px;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: auto;
   background-color: brown;
+}
+
+
+.rick {
+  width: 375px;
+  position: absolute;
+  top: 120px;
+  left: 545px;
+  display: none;
+  overflow: hidden;
+  animation-name: Appearence;
+  animation-duration: 0.5s;
+}
+
+@keyframes Appearence {
+  0% {
+    left: 635px;
+  }
+  100% {
+    left: 545px;
+  }
 }
