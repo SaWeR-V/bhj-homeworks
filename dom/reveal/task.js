@@ -1,6 +1,15 @@
-const block = document.getElementsByClassName('reveal');
+const block = document.querySelectorAll('div.reveal');
 
-for (let i = 0; i < block.length; i++) {
-    let res = block[i].getBoundingClientRect();
-    console.log(res)
-}
+window.addEventListener('scroll', () => 
+    block.forEach((elem) => {
+        const { top, bottom } = elem.getBoundingClientRect()
+        console.log({ top, bottom});
+
+        if (top < 680) {
+            elem.classList.add('reveal_active')
+        }
+        if (top < 0 || top > 900) {
+            elem.classList.remove('reveal_active')
+        }
+    })
+);
