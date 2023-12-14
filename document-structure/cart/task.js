@@ -1,7 +1,6 @@
 const products = Array.from(document.getElementsByClassName('product'));
 let cart = document.querySelector('div.cart__products');
 
-
 products.forEach((product) => {
    const dec = product.querySelector('div.product__quantity-control_dec');
    const inc = product.querySelector('div.product__quantity-control_inc');
@@ -31,9 +30,24 @@ products.forEach((product) => {
 
       let img = image.cloneNode(true);
       img.className = 'cart__product-image';
+      
+      let goods = cart.querySelectorAll('div.cart__product');
+      let productInCart = Array.from(goods).find(elem => {
+         return elem.getAttribute('data-id') === product.getAttribute('data-id')
+         }
+      );
 
-      cart.appendChild(cartWrapper);
-      cartWrapper.appendChild(cartCounter);
-      cartWrapper.appendChild(img);
+      if (!productInCart) {
+         cart.appendChild(cartWrapper);
+         cartWrapper.appendChild(cartCounter);
+         cartWrapper.appendChild(img);
+      }
+
+      else {
+         let currentCountInCart = parseInt(productInCart.querySelector('.cart__product-count').innerHTML, 10);
+         let countToAdd = parseInt(counter.innerHTML, 10);
+         productInCart.querySelector('.cart__product-count').innerHTML = currentCountInCart + countToAdd;
+      }
+
    })
 })

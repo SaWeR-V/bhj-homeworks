@@ -4,40 +4,35 @@ let div = document.getElementById('tasks__list');
 
 function addTask() {
 
-    let newTask = document.createElement('div');
-    newTask.className = 'task';
-    div.appendChild(newTask);
+    let newTask = `
+        <div class="task">
+            <div class="task__title">${input.value}</div>
+            <a class="task__remove" href="#">&times</a>
+        </div>
+    `;
 
-    let taskTitle = document.createElement('div');
-    taskTitle.className = 'task__title';
-    taskTitle.innerText = input.value;
-    newTask.appendChild(taskTitle);
-
-    let erase = document.createElement('a');
-    erase.className = 'task__remove';
-    erase.href = '#';
-    erase.innerHTML = '&times;';
-    erase.addEventListener('click', () => {
-        div.removeChild(newTask);
-    });
-    
-    newTask.appendChild(erase);
+    div.insertAdjacentHTML('beforeend', newTask);
+    input.value = null;
 };
 
- 
+function removeTask(e) {
+    const target = e.target;
+    if (target.classList.contains('task__remove')) {
+        const task = target.closest('.task');
+        if (task) {
+            task.remove();
+        }
+    }
+}
           
 btn.addEventListener('click', (e) => {
-        if (input.value !== '') {
+        if (input.value.trim()) {
             e.preventDefault();
         addTask();
     }
 });
 
-window.addEventListener('keydown', (e) => {
-        if (input.value !== '' && e.key === 'Enter' && document.activeElement !== btn) {
-            e.preventDefault();
-        addTask();
-    }
-});
+div.addEventListener('click', removeTask);
+
 
 
